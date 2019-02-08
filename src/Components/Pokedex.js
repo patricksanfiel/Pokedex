@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SelectedPokemon from './SelectedPokemon';
 
 class Pokedex extends Component{
     state = {
@@ -31,12 +32,25 @@ class Pokedex extends Component{
             return(
                 <li 
                     key={pokemon}
-                    onClick={()=>alert(pokemon)}
+                    onClick={(event)=>this.getSelectedPokemonObject(event)}
                 >
                     {pokemon}
                 </li>
             )
         })
+    }
+
+    getSelectedPokemonObject(event){
+        const pokemonName = event.target.textContent.trim()
+        const pokemonSelected = !this.state.pokemonSelected
+        fetch(`http://pokeapi.co/api/v2/pokemon/${pokemonName}`).then(
+            (response) => {
+                response.json().then( json => {
+                    const selectedPokemonObject = json
+                    this.setState({selectedPokemonObject: selectedPokemonObject, pokemonSelected:pokemonSelected})
+                })
+            }
+        )
     }
 
     componentDidMount(){
@@ -47,7 +61,7 @@ class Pokedex extends Component{
         return(
             <div>
                 Pokedex
-                {this.state.pokemonSelected?console.log("hi"):<ul>{this.renderPokemonList()}</ul>}
+                {this.state.pokemonSelected?<SelectedPokemon pokemonObject={this.state.selectedPokemonObject}/>:<ul>{this.renderPokemonList()}</ul>}
             </div>
         )
     }

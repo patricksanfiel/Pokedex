@@ -61,7 +61,7 @@ class Pokedex extends Component{
         return(
             <div>
                 Pokedex
-                {this.state.pokemonSelected?<SelectedPokemon pokemonObject={this.state.selectedPokemonObject}/>:<ul>{this.renderPokemonList()}</ul>}
+                {this.state.pokemonSelected?<SelectedPokemon pokemonObject={this.state.selectedPokemonObject} closeButtonClicked={(event)=>this.setState({pokemonSelected: false})}/>:<ul>{this.renderPokemonList()}</ul>}
             </div>
         )
     }

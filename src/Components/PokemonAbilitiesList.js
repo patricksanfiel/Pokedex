@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PokemonAttributeToggler from 'react';
 
-class PokemonAbilities extends Component{
+class PokemonAbilitiesList extends Component{
     state = {
         abilitiesArray: this.props.abilitiesArray,
         showAbilities: false
@@ -12,7 +13,6 @@ class PokemonAbilities extends Component{
             const currentAbilityName = ability.ability.name
             return <li key={currentAbilityName}>{currentAbilityName}</li>
         })
-        // console.log(abilitiesArray)
     }
 
     toggleDropDown(event){
@@ -29,12 +29,12 @@ class PokemonAbilities extends Component{
         return(
             <div>
                 <header>Abilities</header>
-                <button onClick={(event)=>this.toggleDropDown(event)}>Toggle</button>
                 <ul>{this.state.showAbilities?this.renderAbilities():null}</ul>
+                <button onClick={(event)=>this.toggleDropDown(event)}>Toggle</button>
             </div>
         )
     }
 }
 
 
-export default PokemonAbilities;
+export default PokemonAbilitiesList;

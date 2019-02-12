@@ -11,7 +11,7 @@ class Pokedex extends Component{
     getPokemonList(){
         const pokemonSelected = this.state.pokemonSelected
         if(!pokemonSelected){
-            fetch("http://pokeapi.co/api/v2/pokemon/?limit=964").then(
+            fetch("https://pokeapi.co/api/v2/pokemon/?limit=964").then(
                 response => {
                     response.json().then(
                         (json) => {
@@ -25,6 +25,7 @@ class Pokedex extends Component{
             )
         }
     }
+
 
     renderPokemonList(){
         const sortedPokemonList = this.state.sortedPokemonList;
@@ -43,7 +44,7 @@ class Pokedex extends Component{
     getSelectedPokemonObject(event){
         const pokemonName = event.target.textContent.trim()
         const pokemonSelected = !this.state.pokemonSelected
-        fetch(`http://pokeapi.co/api/v2/pokemon/${pokemonName}`).then(
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then(
             (response) => {
                 response.json().then( json => {
                     const selectedPokemonObject = json

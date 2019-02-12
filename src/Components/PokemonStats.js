@@ -9,7 +9,7 @@ class PokemonStats extends Component{
         return sortedStatsObjectArray.map(statsObject => {
             const currentStat = statsObject.stat.name
             const currentStatValue = statsObject.base_stat
-            return <li key={`${this.props.name}-${currentStat}`}>{currentStat}: {statsObject.base_stat}</li>
+            return <li key={`${this.props.name}-${currentStat}`}>{currentStat}: {currentStatValue}</li>
         })
     }
     render(){

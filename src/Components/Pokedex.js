@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import SelectedPokemon from './SelectedPokemon';
+import PokemonSearch from './PokemonSearch';
+import RenderPokemonList from './RenderPokemonList';
 
 class Pokedex extends Component{
     state = {
         sortedPokemonList: [],
         pokemonSelected: false,
-        selectedPokemonObject: {}
+        selectedPokemonObject: {},
+        viewList: false //false= search by name. True= view list
     }
 
     getPokemonList(){
@@ -27,19 +30,6 @@ class Pokedex extends Component{
     }
 
 
-    renderPokemonList(){
-        const sortedPokemonList = this.state.sortedPokemonList;
-        return sortedPokemonList.map((pokemon) => {
-            return(
-                <li 
-                    key={pokemon}
-                    onClick={(event)=>this.getSelectedPokemonObject(event)}
-                >
-                    {pokemon}
-                </li>
-            )
-        })
-    }
 
     getSelectedPokemonObject(event){
         const pokemonName = event.target.textContent.trim()
@@ -54,6 +44,8 @@ class Pokedex extends Component{
         )
     }
 
+    
+
     componentDidMount(){
         this.getPokemonList()
     }
@@ -62,7 +54,8 @@ class Pokedex extends Component{
         return(
             <div>
                 Pokedex
-                {this.state.pokemonSelected?<SelectedPokemon pokemonObject={this.state.selectedPokemonObject} closeButtonClicked={(event)=>this.setState({pokemonSelected: false})}/>:<ul>{this.renderPokemonList()}</ul>}
+                <PokemonSearch sortedPokemonList={this.state.sortedPokemonList}/>
+                {this.state.pokemonSelected?<SelectedPokemon pokemonObject={this.state.selectedPokemonObject} closeButtonClicked={(event)=>this.setState({pokemonSelected: false})}/>:<ul><RenderPokemonList pokemonList={this.state.sortedPokemonList}/></ul>}
             </div>
         )
     }

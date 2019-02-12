@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PokemonAttributeToggler from 'react';
+
 
 class PokemonAbilitiesList extends Component{
     state = {

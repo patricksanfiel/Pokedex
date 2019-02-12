@@ -95,11 +95,6 @@ class SelectedPokemon extends Component{
                 <div>
                     {this.renderAttributeElement()}
                 </div>
-                <button
-                onClick={this.props.closeButtonClicked}
-                >
-                    Close
-                </button>
             </div>
         )
     }

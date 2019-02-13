@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class PokemonTypes extends Component{
+class SelectedPokemonTypes extends Component{
     state = {
         typesObjectArray:this.props.typesObjectArray
     }
@@ -22,4 +22,4 @@ class PokemonTypes extends Component{
 
 
 
-export default PokemonTypes
+export default SelectedPokemonTypes

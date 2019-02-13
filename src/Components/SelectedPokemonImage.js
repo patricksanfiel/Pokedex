@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class PokemonImage extends Component {
+class SelectedPokemonImage extends Component {
     state = {
         spritesURLObject: this.props.spritesObject,
         spritesPropertyArray: [],
@@ -53,4 +53,4 @@ class PokemonImage extends Component {
 }
 
 
-export default PokemonImage;
+export default SelectedPokemonImage;

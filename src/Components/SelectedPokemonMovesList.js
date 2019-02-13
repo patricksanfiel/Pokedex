@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class PokemonMovesList extends Component{
+class SelectedPokemonMovesList extends Component{
     state={
         movesArray:this.props.movesArray,
         startAt:0,
@@ -52,4 +52,4 @@ class PokemonMovesList extends Component{
 }
 
 
-export default PokemonMovesList;
+export default SelectedPokemonMovesList;

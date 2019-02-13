@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class PokemonAbilitiesList extends Component{
+class SelectedPokemonAbilitiesList extends Component{
     state = {
         abilitiesArray: this.props.abilitiesArray,
         showAbilities: false
@@ -37,4 +37,4 @@ class PokemonAbilitiesList extends Component{
 }
 
 
-export default PokemonAbilitiesList;
+export default SelectedPokemonAbilitiesList;

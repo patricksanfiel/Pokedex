@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import PokemonAbilitiesList from './PokemonAbilitiesList';
-import PokemonMovesList from './PokemonMovesList';
-import PokemonImage from './PokemonImage';
-import PokemonStats from './PokemonStats';
-import PokemonTypes from './PokemonTypes';
+import SelectedPokemonAbilitiesList from './SelectedPokemonAbilitiesList';
+import SelectedPokemonMovesList from './SelectedPokemonMovesList';
+import SelectedPokemonImage from './SelectedPokemonImage';
+import SelectedPokemonStats from './SelectedPokemonStats';
+import SelectedPokemonTypes from './SelectedPokemonTypes';
 
 class SelectedPokemon extends Component{
     state = {
@@ -32,7 +32,7 @@ class SelectedPokemon extends Component{
                 case("abilities"):
                         const abilities = currentPokemonObject[attribute]
                         return (
-                            <PokemonAbilitiesList 
+                            <SelectedPokemonAbilitiesList 
                             key={`${this.state.currentPokemonName}-${attribute}`}
                             abilitiesArray={abilities}
                             />
@@ -47,7 +47,7 @@ class SelectedPokemon extends Component{
                 case("moves"):
                         const moves = currentPokemonObject[attribute]
                         return(
-                            <PokemonMovesList 
+                            <SelectedPokemonMovesList 
                             key={`${this.state.currentPokemonName}-${attribute}`}
                             movesArray={moves}
                             />
@@ -55,7 +55,7 @@ class SelectedPokemon extends Component{
                 case("sprites"):
                         const sprites = currentPokemonObject[attribute]
                         return(
-                            <PokemonImage
+                            <SelectedPokemonImage
                             key={`${this.state.currentPokemonName}-image`}
                             name={this.state.currentPokemonName}
                             spritesObject={sprites}
@@ -64,7 +64,7 @@ class SelectedPokemon extends Component{
                 case("stats"):
                         const stats = currentPokemonObject[attribute]
                         return(
-                            <PokemonStats
+                            <SelectedPokemonStats
                             key={`${this.state.currentPokemonName}-stats`}
                             name={this.state.currentPokemonName}
                             statsObjectArray={stats}
@@ -73,7 +73,7 @@ class SelectedPokemon extends Component{
                 case("types"):
                         const types = currentPokemonObject[attribute]
                         return(
-                            <PokemonTypes
+                            <SelectedPokemonTypes
                             key={`${this.state.currentPokemonName}-types`}
                             name={this.state.currentPokemonName}
                             typesObjectArray={types}
@@ -90,7 +90,7 @@ class SelectedPokemon extends Component{
     }
     render(){
         return(
-            <div>
+            <div id="selected-pokemon">
                 <h1>{this.state.currentPokemonName.toUpperCase()}</h1>
                 <div>
                     {this.renderAttributeElement()}

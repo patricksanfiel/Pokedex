@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import SelectedPokemon from './SelectedPokemon';
-import PokemonSearch from './PokemonSearch';
-import RenderPokemonList from './RenderPokemonList';
+import FindOrDisplayPokemon from './FindOrDisplayPokemon';
 
 class Pokedex extends Component{
     state = {
-        sortedPokemonList: [],
-        pokemonSelected: false,
-        selectedPokemonObject: {},
-        viewList: false //false= search by name. True= view list
+        sortedPokemonList: []
     }
 
     getPokemonList(){
@@ -30,22 +25,6 @@ class Pokedex extends Component{
     }
 
 
-
-    getSelectedPokemonObject(event){
-        const pokemonName = event.target.textContent.trim()
-        const pokemonSelected = !this.state.pokemonSelected
-        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then(
-            (response) => {
-                response.json().then( json => {
-                    const selectedPokemonObject = json
-                    this.setState({selectedPokemonObject: selectedPokemonObject, pokemonSelected:pokemonSelected})
-                })
-            }
-        )
-    }
-
-    
-
     componentDidMount(){
         this.getPokemonList()
     }
@@ -53,9 +32,8 @@ class Pokedex extends Component{
     render(){
         return(
             <div>
-                Pokedex
-                <PokemonSearch sortedPokemonList={this.state.sortedPokemonList}/>
-                {this.state.pokemonSelected?<SelectedPokemon pokemonObject={this.state.selectedPokemonObject} closeButtonClicked={(event)=>this.setState({pokemonSelected: false})}/>:<ul><RenderPokemonList pokemonList={this.state.sortedPokemonList}/></ul>}
+                <h1>Pokedex</h1>
+                <FindOrDisplayPokemon pokemonList={this.state.sortedPokemonList}/>
             </div>
         )
     }

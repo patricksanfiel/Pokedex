@@ -5,37 +5,67 @@ class SelectedPokemonMovesList extends Component{
         movesArray:this.props.movesArray,
         startAt:0,
         endAt:5,
-        currentlyDisplayedMoves: []
+        currentlyDisplayedMoves: [],
+        movesPaginationObject:{},
+        pageNumber:1
+    }
+
+    
+    loadPaginationObject(){
+        let currentPageArray = []
+        let pageCounter = 0
+        let moveCounter = 0
+        let movesPaginationObject = {}
+        const movesArray = this.state.movesArray.map(move=>move.move.name).sort()
+        movesArray.forEach(move => {
+            moveCounter++
+            currentPageArray.push(move)
+            if(currentPageArray.length===5){
+                pageCounter++
+                movesPaginationObject[`${pageCounter}`] = currentPageArray
+                currentPageArray = []
+            } else if((movesArray.length)-moveCounter===(currentPageArray.length)){
+                pageCounter++
+                movesPaginationObject[`${pageCounter}`] = currentPageArray
+            }
+        })
+        console.log(currentPageArray)
+        this.setState({movesPaginationObject:movesPaginationObject})
+    }
+    
+
+    incrementPage(event){
+        const buttonClicked = event.target.textContent;
+        let pageNumber = this.state.pageNumber
+        const movesPaginationObject = this.state.movesPaginationObject
+        const movesPaginationObjectLength = Object.keys(movesPaginationObject).length
+        console.log(movesPaginationObjectLength)
+        switch(buttonClicked){
+            case("Next"):
+                pageNumber = (pageNumber+1)<=movesPaginationObjectLength?pageNumber+1:1
+                break
+            default:
+                pageNumber = (pageNumber-1)>=1?pageNumber-1:movesPaginationObjectLength
+        }
+        this.setState({pageNumber: pageNumber})
     }
 
     renderMoves(){
-        const movesArray = this.state.movesArray
-        const startAt = this.state.startAt;
-        const endAt = startAt+5
-        const sortedMovesArray = movesArray.sort((currentMove, nextMove) => currentMove.move.name>nextMove.move.name?1:-1)
-        const currentlyDisplayedMoves = sortedMovesArray.slice(startAt, endAt)
-        return currentlyDisplayedMoves.map(move => {
-            const currentMove = move.move.name
-            return <li key={currentMove}>{currentMove}</li>
-        })
-    }
-    
-    incrementStartPoint(event){
-        const previousEndAt = this.state.endAt;
-        const movesArrayFinalIndex = (this.state.movesArray.length-1); //The last index of the moves array which will not return undefined.
-        let incrementBy = previousEndAt+5>movesArrayFinalIndex?5-((previousEndAt+5)-movesArrayFinalIndex): 5 //By default, increment by 5 items at a time. If Incrementing by 5 would put us out of the moveArray's index range, we find the maximum number we could increment by without moving out of the range and set the incrementer to that.
-        let updatedStartAt = previousEndAt
-        let updatedEndAt = updatedStartAt+incrementBy;
-        if ( incrementBy === 0){//Only occurs if the updatedEndAt point has already been set to the movesArrayFinalIndex once already
-            incrementBy = 5;
-            updatedStartAt = 0;
-            updatedEndAt = updatedStartAt+incrementBy;
-
+        const movesPaginationObject = this.state.movesPaginationObject
+        const pageNumber = this.state.pageNumber
+        const currentlyDisplayedMoves = movesPaginationObject[pageNumber]
+        console.log(currentlyDisplayedMoves)
+        if(currentlyDisplayedMoves){
+            return currentlyDisplayedMoves.map(move => {
+                return <li key={move}>{move}</li>
+            })    
         }
-        console.log("incrementby", incrementBy)
-        console.log("updatedStartAt", updatedStartAt)
-        console.log("updatedEndAt", updatedEndAt)
-        this.setState({startAt: updatedStartAt, endAt:updatedEndAt})
+    }
+
+    
+
+    componentDidMount(){
+        this.loadPaginationObject()
     }
 
 
@@ -45,7 +75,8 @@ class SelectedPokemonMovesList extends Component{
                 <ul>
                     {this.renderMoves()}
                 </ul>
-                <button onClick={(event)=>this.incrementStartPoint(event)}>Next 5 Moves</button>
+                <button onClick={(event)=>this.incrementPage(event)}>Previous</button>
+                <button onClick={(event)=>this.incrementPage(event)}>Next</button>
             </div>
         )
     }

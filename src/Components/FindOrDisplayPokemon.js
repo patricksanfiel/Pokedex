@@ -24,7 +24,6 @@ class FindOrDisplayPokemon extends Component {
         const selectedPokemon = event.target.textContent.trim()
         fetch(`https://pokeapi.co/api/v2/pokemon/${selectedPokemon}`).then(
             (response) => {
-                console.log(response)
                 response.json().then( json => {
                     const selectedPokemonObject = json
                     this.setState({selectedPokemonObject: selectedPokemonObject})
@@ -39,6 +38,7 @@ class FindOrDisplayPokemon extends Component {
             return(
                 <li 
                 key={pokemon}
+                className="pokemon-list-item"
                 onClick={(event)=>this.getSelectedPokemonObject(event)}
                 >
                     {pokemon}
@@ -55,7 +55,7 @@ class FindOrDisplayPokemon extends Component {
                     <div>
                         <label>Search</label>
                         <input onChange={(event)=>this.searchPokemonByName(event)} style={{border:"1px solid black"}} value={searchQuery}></input>
-                        <button onClick={()=>this.setState({viewSearch: false, searchQuery:""})}>Close Search</button>
+                        <button onClick={()=>this.setState({viewSearch: false, searchQuery:"", searchedPokemonArray:[]})}>Close Search</button>
                         {this.renderList(this.state.searchedPokemonArray)}
                     </div>
                 )

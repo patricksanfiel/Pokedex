@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+const pokeball = require("../Assets/Images/pokeball.svg")
+// Fix Inline Styling
 
 class SelectedPokemonImage extends Component {
     state = {
@@ -12,15 +14,50 @@ class SelectedPokemonImage extends Component {
         this.setState({spritesPropertyArray: spritesPropertyArray})
     }
 
-    nextImage(){
+    // nextImage(){
+    //     let spritesURLArrayIndex = this.state.spritesURLArrayIndex;
+    //     const spritesPropertyArray = this.state.spritesPropertyArray;
+    //     if(spritesURLArrayIndex<(spritesPropertyArray.length-1)){
+    //         spritesURLArrayIndex++
+    //     } else {
+    //         spritesURLArrayIndex = 0;
+    //     }
+        
+    //     this.setState({spritesURLArrayIndex: spritesURLArrayIndex})
+    // }
+
+    // previousImage(event){
+    //     console.log(event.target.textContent)
+    //     let spritesURLArrayIndex = this.state.spritesURLArrayIndex;
+    //     const spritesPropertyArray = this.state.spritesPropertyArray;
+    //     if(spritesURLArrayIndex>0){
+    //         spritesURLArrayIndex--
+    //     } else {
+    //         spritesURLArrayIndex = (spritesPropertyArray.length-1)
+    //     }
+    //     this.setState({spritesURLArrayIndex: spritesURLArrayIndex})
+    // }
+
+    changeImage(event){
         let spritesURLArrayIndex = this.state.spritesURLArrayIndex;
         const spritesPropertyArray = this.state.spritesPropertyArray;
-        if(spritesURLArrayIndex<(spritesPropertyArray.length-1)){
-            spritesURLArrayIndex++
-        } else {
-            spritesURLArrayIndex = 0;
+        const spritesPropertyArrayFinalPosition = (spritesPropertyArray.length-1)
+        const buttonClicked = event.target.textContent
+        switch(buttonClicked){
+            case("Previous Image"):
+                if(spritesURLArrayIndex>0){
+                    spritesURLArrayIndex--
+                } else {
+                    spritesURLArrayIndex = (spritesPropertyArrayFinalPosition)
+                }
+                break;
+            default:
+                if(spritesURLArrayIndex<spritesPropertyArrayFinalPosition){
+                    spritesURLArrayIndex++
+                } else {
+                    spritesURLArrayIndex = 0;
+                }
         }
-        
         this.setState({spritesURLArrayIndex: spritesURLArrayIndex})
     }
 
@@ -29,14 +66,32 @@ class SelectedPokemonImage extends Component {
         const spritesCurrentProperty = this.state.spritesPropertyArray[this.state.spritesURLArrayIndex]
         const currentSpriteURL = spritesURLObject[spritesCurrentProperty]
         if(currentSpriteURL){
-            return <img src={currentSpriteURL} alt={`${this.props.name}-${spritesCurrentProperty}`}/>
+            return(
+                <div>
+                    <img src={currentSpriteURL} alt={`${this.props.name}-${spritesCurrentProperty}`}/>
+                </div> 
+            )
         } else {
-            return <p>Sorry, no image available</p>
+            return(
+                <div>
+                    <img src={pokeball} alt="pokeball" id="pokeball-image" style={{width:"100px",height:"100px"}}/>
+                    <p>Sorry, no image available</p>
+                </div>
+            )
         }
     }
 
-    renderNextImageButton(){
-        return this.state.spritesPropertyArray.length>1?<button onClick={()=>this.nextImage()}>Next Image</button>:null
+    renderChangeImageButtons(){
+        if(this.state.spritesPropertyArray.length>1){
+            return(
+                <div>
+                    <button onClick={(event)=>this.changeImage(event)}>Previous Image</button>
+                    <button onClick={(event)=>this.changeImage(event)}>Next Image</button>
+                </div>
+            )
+        } else {
+            return null
+        }
     }
    
     componentDidMount(){
@@ -46,7 +101,7 @@ class SelectedPokemonImage extends Component {
         return(
             <div>
                 {this.renderImage()}
-                {this.renderNextImageButton()}
+                {this.renderChangeImageButtons()}
             </div>
         )
     }

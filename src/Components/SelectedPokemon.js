@@ -20,7 +20,6 @@ class SelectedPokemon extends Component{
                 currentPokemonAttributeNames.push(property)
             }
         }
-        console.table(currentPokemonAttributeNames)
         this.setState({currentPokemonAttributeNames: currentPokemonAttributeNames})
     }
 
@@ -41,7 +40,6 @@ class SelectedPokemon extends Component{
                         const height = currentPokemonObject[attribute]
                         return <div key={`${currentPokemonObject.name}-height`}><span><strong>Height</strong>: {height}</span></div>
                 case("weight"):
-                        console.log("weight")
                         const weight = currentPokemonObject[attribute]
                         return <div key={`${this.state.currentPokemonName}-weight`}><span><strong>Weight</strong>: {weight}</span></div>
                 case("moves"):
@@ -80,7 +78,7 @@ class SelectedPokemon extends Component{
                             />
                         )
                 default:
-                    break;    
+                    return null;    
             }
         })
     }

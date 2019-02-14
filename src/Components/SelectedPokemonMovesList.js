@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 class SelectedPokemonMovesList extends Component{
     state={
         movesArray:this.props.movesArray,
-        startAt:0,
-        endAt:5,
-        currentlyDisplayedMoves: [],
         movesPaginationObject:{},
         pageNumber:1
     }
@@ -17,6 +14,7 @@ class SelectedPokemonMovesList extends Component{
         let moveCounter = 0
         let movesPaginationObject = {}
         const movesArray = this.state.movesArray.map(move=>move.move.name).sort()
+        console.log(movesArray)
         movesArray.forEach(move => {
             moveCounter++
             currentPageArray.push(move)
@@ -24,12 +22,12 @@ class SelectedPokemonMovesList extends Component{
                 pageCounter++
                 movesPaginationObject[`${pageCounter}`] = currentPageArray
                 currentPageArray = []
-            } else if((movesArray.length)-moveCounter===(currentPageArray.length)){
+            } else if(moveCounter===movesArray.length){
                 pageCounter++
                 movesPaginationObject[`${pageCounter}`] = currentPageArray
+                currentPageArray = []
             }
         })
-        console.log(currentPageArray)
         this.setState({movesPaginationObject:movesPaginationObject})
     }
     
@@ -39,7 +37,6 @@ class SelectedPokemonMovesList extends Component{
         let pageNumber = this.state.pageNumber
         const movesPaginationObject = this.state.movesPaginationObject
         const movesPaginationObjectLength = Object.keys(movesPaginationObject).length
-        console.log(movesPaginationObjectLength)
         switch(buttonClicked){
             case("Next"):
                 pageNumber = (pageNumber+1)<=movesPaginationObjectLength?pageNumber+1:1

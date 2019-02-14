@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Formatter from "./Formatter"
 
 
 class SelectedPokemonAbilitiesList extends Component{
@@ -11,7 +12,7 @@ class SelectedPokemonAbilitiesList extends Component{
         const abilitiesArray = this.state.abilitiesArray
         return abilitiesArray.map(ability => {
             const currentAbilityName = ability.ability.name
-            return <li key={currentAbilityName}>{currentAbilityName}</li>
+            return <li key={currentAbilityName}>{Formatter(currentAbilityName)}</li>
         })
     }
 

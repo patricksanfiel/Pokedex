@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Formatter from "./Formatter";
 
 class SelectedPokemonStats extends Component{
     state={
@@ -9,12 +10,13 @@ class SelectedPokemonStats extends Component{
         return sortedStatsObjectArray.map(statsObject => {
             const currentStat = statsObject.stat.name
             const currentStatValue = statsObject.base_stat
-            return <li key={`${this.props.name}-${currentStat}`}>{currentStat}: {currentStatValue}</li>
+            return <li key={`${this.props.name}-${currentStat}`}>{Formatter(currentStat)}: {currentStatValue}</li>
         })
     }
     render(){
         return(
             <div>
+                <h3>Stats</h3>
                 {this.renderStats()}
             </div>
         )

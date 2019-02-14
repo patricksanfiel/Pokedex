@@ -12,6 +12,7 @@ class SelectedPokemon extends Component{
         currentPokemonAttributeNames: []
     }
 
+
     getPokemonAttributeNames(){
         const currentPokemonObject = this.state.currentPokemonObject
         const currentPokemonAttributeNames = this.state.currentPokemonAttributeNames

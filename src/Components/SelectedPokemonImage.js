@@ -14,30 +14,6 @@ class SelectedPokemonImage extends Component {
         this.setState({spritesPropertyArray: spritesPropertyArray})
     }
 
-    // nextImage(){
-    //     let spritesURLArrayIndex = this.state.spritesURLArrayIndex;
-    //     const spritesPropertyArray = this.state.spritesPropertyArray;
-    //     if(spritesURLArrayIndex<(spritesPropertyArray.length-1)){
-    //         spritesURLArrayIndex++
-    //     } else {
-    //         spritesURLArrayIndex = 0;
-    //     }
-        
-    //     this.setState({spritesURLArrayIndex: spritesURLArrayIndex})
-    // }
-
-    // previousImage(event){
-    //     console.log(event.target.textContent)
-    //     let spritesURLArrayIndex = this.state.spritesURLArrayIndex;
-    //     const spritesPropertyArray = this.state.spritesPropertyArray;
-    //     if(spritesURLArrayIndex>0){
-    //         spritesURLArrayIndex--
-    //     } else {
-    //         spritesURLArrayIndex = (spritesPropertyArray.length-1)
-    //     }
-    //     this.setState({spritesURLArrayIndex: spritesURLArrayIndex})
-    // }
-
     changeImage(event){
         let spritesURLArrayIndex = this.state.spritesURLArrayIndex;
         const spritesPropertyArray = this.state.spritesPropertyArray;

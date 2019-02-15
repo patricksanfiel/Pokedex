@@ -1,14 +1,14 @@
 const Formatter = (string) => {
-        let formattedMove = string
+        let formattedString = string
         let currentMove = ""
-        if(formattedMove.includes("-")){
-            formattedMove = formattedMove.replace("-", " ")
+        while(formattedString.includes("-")){
+            formattedString = formattedString.replace("-", " ")
         }
 
-        formattedMove.split(" ").forEach(word=>{
+        formattedString.split(" ").forEach(word=>{
             let firstChar = word[0]
-            formattedMove = word.replace(firstChar, firstChar.toUpperCase())
-            currentMove = currentMove===""?currentMove+formattedMove: currentMove+" "+formattedMove
+            formattedString = word.replace(firstChar, firstChar.toUpperCase())
+            currentMove = currentMove===""?currentMove+formattedString: currentMove+" "+formattedString
         })
         return currentMove
 }

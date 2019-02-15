@@ -68,6 +68,7 @@ class SelectedPokemonMovesList extends Component{
     render(){
         return(
             <div>
+                <header>Moves</header>
                 <ul>
                     {this.renderMoves()}
                 </ul>

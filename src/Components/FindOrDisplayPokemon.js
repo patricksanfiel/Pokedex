@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SelectedPokemon from './SelectedPokemon';
+import Formatter from './Formatter'
 
 class FindOrDisplayPokemon extends Component {
     state = {
@@ -21,7 +22,7 @@ class FindOrDisplayPokemon extends Component {
     }
 
     getSelectedPokemonObject(event){
-        const selectedPokemon = event.target.textContent.trim()
+        const selectedPokemon = event.target.id.trim()
         fetch(`https://pokeapi.co/api/v2/pokemon/${selectedPokemon}`).then(
             (response) => {
                 response.json().then( json => {
@@ -38,10 +39,11 @@ class FindOrDisplayPokemon extends Component {
             return(
                 <li 
                 key={pokemon}
+                id={pokemon}
                 className="pokemon-list-item"
                 onClick={(event)=>this.getSelectedPokemonObject(event)}
                 >
-                    {pokemon}
+                    {Formatter(pokemon)}
                 </li>)
         })
     }

@@ -4,6 +4,7 @@ import SelectedPokemonMovesList from './SelectedPokemonMovesList';
 import SelectedPokemonImage from './SelectedPokemonImage';
 import SelectedPokemonStats from './SelectedPokemonStats';
 import SelectedPokemonTypes from './SelectedPokemonTypes';
+import Formatter from './Formatter'
 
 class SelectedPokemon extends Component{
     state = {
@@ -17,7 +18,7 @@ class SelectedPokemon extends Component{
         const currentPokemonObject = this.state.currentPokemonObject
         const currentPokemonAttributeNames = this.state.currentPokemonAttributeNames
         for(var property in currentPokemonObject){
-            if(property==='abilities' || property === 'height' || property === 'moves' || property === 'sprites' || property === 'stats' || property === 'types' || property === 'weight'){
+            if(property==='abilities' || property === 'height' || property === 'moves' || property === 'sprites' || property === 'stats' || property === 'types'|| property === 'weight'){
                 currentPokemonAttributeNames.push(property)
             }
         }
@@ -25,7 +26,10 @@ class SelectedPokemon extends Component{
     }
 
     renderAttributeElement(){
-        const currentPokemonAttributeNames = this.state.currentPokemonAttributeNames
+        const sortOrder = ["sprites", "height", "weight", "types", "stats", "abilities", "moves"]
+        const currentPokemonAttributeNames = this.state.currentPokemonAttributeNames.sort((currentAtt, nextAtt) => {
+            return sortOrder.indexOf(currentAtt)>sortOrder.indexOf(nextAtt)?1:-1
+        })
         const currentPokemonObject = this.state.currentPokemonObject
         return currentPokemonAttributeNames.map((attribute) => {
             switch(attribute){
@@ -90,7 +94,7 @@ class SelectedPokemon extends Component{
     render(){
         return(
             <div id="selected-pokemon">
-                <h1>{this.state.currentPokemonName.toUpperCase()}</h1>
+                <h1>{Formatter(this.state.currentPokemonName)}</h1>
                 <div>
                     {this.renderAttributeElement()}
                 </div>

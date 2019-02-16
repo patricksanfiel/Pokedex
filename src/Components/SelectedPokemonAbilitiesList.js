@@ -1,17 +1,19 @@
 import React from 'react';
-import Formatter from "./Formatter"
+import formatter from "../UtilityFunctions/formatter"
 
 
 const SelectedPokemonAbilitiesList = (props) => {
 
     const abilitiesArray = props.abilitiesArray
     return(
-        <div>
+        <div className="selected-pokemon-attribute-div">
             <header>Abilities</header>
-            {abilitiesArray.map(ability => {
-                const currentAbilityName = ability.ability.name
-                return <li key={currentAbilityName}>{Formatter(currentAbilityName)}</li>
-            })}
+            <ul>
+                {abilitiesArray.map(ability => {
+                    const currentAbilityName = ability.ability.name
+                    return <li className="attribute-list-item" key={currentAbilityName}>{formatter(currentAbilityName)}</li>
+                })}
+            </ul>
         </div> 
     )
 

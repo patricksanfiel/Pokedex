@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Formatter from './Formatter';
+import formatter from '../UtilityFunctions/formatter';
 
 class SelectedPokemonMovesList extends Component{
     state={
@@ -34,12 +34,13 @@ class SelectedPokemonMovesList extends Component{
     
 
     incrementPage(event){
-        const buttonClicked = event.target.textContent;
+        const buttonClicked = event.target.getAttribute("data-button");
         let pageNumber = this.state.pageNumber
         const movesPaginationObject = this.state.movesPaginationObject
         const movesPaginationObjectLength = Object.keys(movesPaginationObject).length
+        console.log(buttonClicked)
         switch(buttonClicked){
-            case("Next"):
+            case("next"):
                 pageNumber = (pageNumber+1)<=movesPaginationObjectLength?pageNumber+1:1
                 break
             default:
@@ -54,7 +55,7 @@ class SelectedPokemonMovesList extends Component{
         const currentlyDisplayedMoves = movesPaginationObject[pageNumber]
         if(currentlyDisplayedMoves){
             return currentlyDisplayedMoves.map(move => {
-                return <li key={move}>{Formatter(move)}</li>
+                return <li className="attribute-list-item" key={move}>{formatter(move)}</li>
             })    
         }
     }
@@ -67,13 +68,13 @@ class SelectedPokemonMovesList extends Component{
 
     render(){
         return(
-            <div>
+            <div className="selected-pokemon-attribute-div">
                 <header>Moves</header>
                 <ul>
                     {this.renderMoves()}
                 </ul>
-                <button onClick={(event)=>this.incrementPage(event)}>Previous</button>
-                <button onClick={(event)=>this.incrementPage(event)}>Next</button>
+                <button onClick={(event)=>this.incrementPage(event)} className="carousel-button"><i className="fas fa-arrow-left" data-button="previous"></i></button>
+                <button onClick={(event)=>this.incrementPage(event)} className="carousel-button"><i className="fas fa-arrow-right" data-button="next"></i></button>
             </div>
         )
     }

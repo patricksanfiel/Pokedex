@@ -1,4 +1,4 @@
-const Formatter = (string) => {
+const formatter = (string) => {
         let formattedString = string
         let currentMove = ""
         while(formattedString.includes("-")){
@@ -15,4 +15,4 @@ const Formatter = (string) => {
 
 
 
-export default Formatter
+export default formatter

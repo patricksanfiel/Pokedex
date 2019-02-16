@@ -1,16 +1,18 @@
 import React from 'react';
-import Formatter from "./Formatter";
+import formatter from "../UtilityFunctions/formatter";
 
 const SelectedPokemonStats =  (props) => {
     const sortedStatsObjectArray = props.statsObjectArray.sort((currentObject, nextObject)=>currentObject.stat.name>nextObject.stat.name?1:-1);
     return(
-        <div>
+        <div className="selected-pokemon-attribute-div">
             <header>Stats</header>
-            {sortedStatsObjectArray.map(statsObject => {
-                const currentStat = statsObject.stat.name
-                const currentStatValue = statsObject.base_stat
-                return <li key={`${props.name}-${currentStat}`}>{Formatter(currentStat)}: {currentStatValue}</li>
-            })}
+            <ul>
+                {sortedStatsObjectArray.map(statsObject => {
+                    const currentStat = statsObject.stat.name
+                    const currentStatValue = statsObject.base_stat
+                    return <li className="attribute-list-item" key={`${props.name}-${currentStat}`}>{formatter(currentStat)}: {currentStatValue}</li>
+                })}
+            </ul>
         </div>
     )
 }

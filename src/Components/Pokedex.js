@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FindOrDisplayPokemon from './FindOrDisplayPokemon';
+import "../Assets/CSS/Pokedex.css"
 
 class Pokedex extends Component{
     state = {
@@ -31,8 +32,8 @@ class Pokedex extends Component{
 
     render(){
         return(
-            <div>
-                <h1>Pokedex</h1>
+            <div id="pokedex">
+                <h1 id="pokedex-header">Pokedex</h1>
                 <FindOrDisplayPokemon pokemonList={this.state.sortedPokemonList}/>
             </div>
         )

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import SelectedPokemon from './SelectedPokemon';
-import Formatter from './Formatter'
+import formatter from '../UtilityFunctions/formatter'
 
 class FindOrDisplayPokemon extends Component {
     state = {
@@ -14,7 +14,7 @@ class FindOrDisplayPokemon extends Component {
 
 
     searchPokemonByName(event){
-        const searchQuery = event.target.value;
+        const searchQuery = event.target.value.replace(" ","-");
         const sortedPokemonList = this.state.allPokemonArray;
         const searchedPokemonArray = [];
         sortedPokemonList.forEach(pokemon=>pokemon.includes(searchQuery)?searchedPokemonArray.push(pokemon):false)
@@ -35,17 +35,24 @@ class FindOrDisplayPokemon extends Component {
 
     renderList(list){
         const pokemonList = list
-        return pokemonList.map(pokemon=>{
-            return(
-                <li 
-                key={pokemon}
-                id={pokemon}
-                className="pokemon-list-item"
-                onClick={(event)=>this.getSelectedPokemonObject(event)}
-                >
-                    {Formatter(pokemon)}
-                </li>)
-        })
+        return(
+            <ul>
+                {pokemonList.map(pokemon=>{
+                    return(
+                        <li 
+                        key={pokemon}
+                        id={pokemon}
+                        className="pokemon-list-item"
+                        onClick={(event)=>this.getSelectedPokemonObject(event)}
+                        >
+                            {formatter(pokemon)}
+                        </li>
+                    )
+                })}
+            </ul>
+        ) 
+
+
     }
 
     searchDisplaySwitch(){//Displays a search typeahead if viewSearch is true, if false, displays a button that will set viewSearch to true onClick
@@ -55,16 +62,16 @@ class FindOrDisplayPokemon extends Component {
                 const searchQuery = this.state.searchQuery
                 return(
                     <div>
-                        <label>Search</label>
-                        <input onChange={(event)=>this.searchPokemonByName(event)} style={{border:"1px solid black"}} value={searchQuery}></input>
-                        <button onClick={()=>this.setState({viewSearch: false, searchQuery:"", searchedPokemonArray:[]})}>Close Search</button>
+                        <label id="search-label">Search</label>
+                        <input onChange={(event)=>this.searchPokemonByName(event)} style={{border:"1px solid black"}} value={searchQuery} id="search-input"></input>
+                        <button className="close-btn" onClick={()=>this.setState({viewSearch: false, searchQuery:"", searchedPokemonArray:[]})}>Close Search</button>
                         {this.renderList(this.state.searchedPokemonArray)}
                     </div>
                 )
             default:
                 return(
                     <div>
-                        <button onClick={()=>this.setState({viewSearch:true, viewList: false, searchedPokemon:[]})}>View Search</button>
+                        <button className="list-or-search-button" onClick={()=>this.setState({viewSearch:true, viewList: false, searchedPokemon:[]})}>View Search</button>
                     </div>
                 )
 
@@ -77,14 +84,14 @@ class FindOrDisplayPokemon extends Component {
             case(true):
                 return(
                     <div>
-                        <button onClick={()=>this.setState({viewList: false})}>Close the List</button>
+                        <button className="close-btn"onClick={()=>this.setState({viewList: false})}>Close List</button>
                         {this.renderList(this.state.allPokemonArray)}
                     </div>
                 )
             default:
                 return(
                     <div>
-                        <button onClick={()=>this.setState({viewList:true, viewSearch: false})}>View All Pokemon</button>
+                        <button className="list-or-search-button" onClick={()=>this.setState({viewList:true, viewSearch: false})}>View All Pokemon</button>
                     </div>
                 )  
         }
@@ -102,7 +109,7 @@ class FindOrDisplayPokemon extends Component {
                     return this.searchDisplaySwitch()
                 } else {
                     return (
-                        <div>
+                        <div className="f-o-d-elmt-child">
                             {this.listDisplaySwitch()}
                             {this.searchDisplaySwitch()}
                         </div>
@@ -110,10 +117,10 @@ class FindOrDisplayPokemon extends Component {
                 }
             default:
                 return(
-                    <div>
+                    <div className="selected-pokemon-div">
                         <SelectedPokemon pokemonObject={this.state.selectedPokemonObject} className="selected-pokemon"/>
-                        <button id="close-selected" onClick={()=>this.setState({selectedPokemonObject:{}})}>Close</button>
-                </div>
+                        <button id="close-selected" className="close-btn" onClick={()=>this.setState({selectedPokemonObject:{}})}>Close</button>
+                    </div>
                 ) 
         }
     }
@@ -126,7 +133,11 @@ class FindOrDisplayPokemon extends Component {
 
 
     render(){
-        return this.selectedPokemonDisplaySwitch()
+        return(
+            <div id="f-o-d-elmt" className="body-font">
+                {this.selectedPokemonDisplaySwitch()}
+            </div>
+        ) 
     }
 }
 

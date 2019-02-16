@@ -4,7 +4,7 @@ import SelectedPokemonMovesList from './SelectedPokemonMovesList';
 import SelectedPokemonImage from './SelectedPokemonImage';
 import SelectedPokemonStats from './SelectedPokemonStats';
 import SelectedPokemonTypes from './SelectedPokemonTypes';
-import Formatter from './Formatter'
+import formatter from '../UtilityFunctions/formatter'
 
 class SelectedPokemon extends Component{
     state = {
@@ -43,10 +43,10 @@ class SelectedPokemon extends Component{
                         )
                 case("height"):
                         const height = currentPokemonObject[attribute]
-                        return <div key={`${currentPokemonObject.name}-height`}><span><strong>Height</strong>: {height}</span></div>
+                        return <div className="selected-pokemon-attribute-div" key={`${currentPokemonObject.name}-height`}><span><strong>Height</strong>: {height}</span></div>
                 case("weight"):
                         const weight = currentPokemonObject[attribute]
-                        return <div key={`${this.state.currentPokemonName}-weight`}><span><strong>Weight</strong>: {weight}</span></div>
+                        return <div className="selected-pokemon-attribute-div" key={`${this.state.currentPokemonName}-weight`}><span><strong>Weight</strong>: {weight}</span></div>
                 case("moves"):
                         const moves = currentPokemonObject[attribute]
                         return(
@@ -94,7 +94,7 @@ class SelectedPokemon extends Component{
     render(){
         return(
             <div id="selected-pokemon">
-                <h1>{Formatter(this.state.currentPokemonName)}</h1>
+                <h1>{formatter(this.state.currentPokemonName)}</h1>
                 <div>
                     {this.renderAttributeElement()}
                 </div>

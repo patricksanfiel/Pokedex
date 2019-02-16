@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 const pokeball = require("../Assets/Images/pokeball.svg")
-// Fix Inline Styling
 
 class SelectedPokemonImage extends Component {
     state = {
@@ -18,9 +17,9 @@ class SelectedPokemonImage extends Component {
         let spritesURLArrayIndex = this.state.spritesURLArrayIndex;
         const spritesPropertyArray = this.state.spritesPropertyArray;
         const spritesPropertyArrayFinalPosition = (spritesPropertyArray.length-1)
-        const buttonClicked = event.target.textContent
+        const buttonClicked = event.target.getAttribute("data-button")
         switch(buttonClicked){
-            case("Previous Image"):
+            case("previous"):
                 if(spritesURLArrayIndex>0){
                     spritesURLArrayIndex--
                 } else {
@@ -50,7 +49,7 @@ class SelectedPokemonImage extends Component {
         } else {
             return(
                 <div>
-                    <img src={pokeball} alt="pokeball" id="pokeball-image" style={{width:"100px",height:"100px"}}/>
+                    <img src={pokeball} alt="pokeball" id="pokeball-image" height="100px" width="100px"/>
                     <p>Sorry, no image available</p>
                 </div>
             )
@@ -61,8 +60,8 @@ class SelectedPokemonImage extends Component {
         if(this.state.spritesPropertyArray.length>1){
             return(
                 <div>
-                    <button onClick={(event)=>this.changeImage(event)}>Previous Image</button>
-                    <button onClick={(event)=>this.changeImage(event)}>Next Image</button>
+                    <button onClick={(event)=>this.changeImage(event)} className="carousel-button"><i className="fas fa-arrow-left" data-button="previous"></i></button>
+                    <button onClick={(event)=>this.changeImage(event)} className="carousel-button"><i className="fas fa-arrow-right" data-button="next"></i></button>
                 </div>
             )
         } else {
@@ -75,7 +74,7 @@ class SelectedPokemonImage extends Component {
     }
     render(){
         return(
-            <div>
+            <div id="selected-pokemon-image-div" className="selected-pokemon-attribute-div">
                 {this.renderImage()}
                 {this.renderChangeImageButtons()}
             </div>

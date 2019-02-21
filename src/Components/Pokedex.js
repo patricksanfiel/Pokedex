@@ -34,7 +34,7 @@ class Pokedex extends Component{
         return(
             <div id="pokedex">
                 <h1 id="pokedex-header">Pokedex</h1>
-                <FindOrDisplayPokemon pokemonList={this.state.sortedPokemonList}/>
+                <FindOrDisplayPokemon pokemonList={this.state.sortedPokemonList} key={`list-${this.state.sortedPokemonList.length}`}/>
             </div>
         )
     }

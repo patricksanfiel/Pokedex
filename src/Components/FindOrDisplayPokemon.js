@@ -4,7 +4,7 @@ import formatter from '../UtilityFunctions/formatter'
 
 class FindOrDisplayPokemon extends Component {
     state = {
-        allPokemonArray: [],
+        allPokemonArray: this.props.pokemonList,
         selectedPokemonObject:{},
         searchedPokemonArray: [],
         viewList: false,
@@ -124,13 +124,6 @@ class FindOrDisplayPokemon extends Component {
                 ) 
         }
     }
-
-    componentWillReceiveProps(nextProps){
-        if(nextProps.pokemonList !== this.props.pokemonList){
-            this.setState({allPokemonArray:nextProps.pokemonList});
-        }
-    }
-
 
     render(){
         return(

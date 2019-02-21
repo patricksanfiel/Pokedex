@@ -14,7 +14,7 @@ button:active{
 
 header{
     font-weight: bold;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
 ul{
@@ -144,6 +144,8 @@ li{
 /* Selected Pokemon Styles */
 
     .selected-pokemon-attribute-div{
+        color: white;
+        text-shadow: 1px 1px 1px black, 1px 1px 1px black, 1px 1px 1px black, 1px 1px 1px black;
         margin: 2em auto;
     }
     .carousel-button{
@@ -229,6 +231,18 @@ li{
     /* Selected Pokemon Stats */
     .attribute-list-item{
         margin: 0.5em;
+    }
+
+    #selected-pokemon{
+        background-image: url("../Images/scanlines-slowed.gif");
+        background-color: #B2B4AF;
+        height: 100%;
+        position: relative;
+        top: 0;
+    }
+
+    #selected-pokemon h1{
+        margin-top: 0;
     }
 
 /* End Selected Pokemon Styles */

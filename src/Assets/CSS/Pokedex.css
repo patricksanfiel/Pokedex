@@ -14,7 +14,6 @@ button:active{
 
 header{
     font-weight: bold;
-    /* text-decoration: underline; */
 }
 
 ul{
@@ -38,13 +37,8 @@ li{
     border: 2px outset rgb(180, 137, 5);
 }
 
-/* End General Styles */
-
-
-/* Pokedex Component Styles */
 #pokedex{
     background-color: #c61433;
-    height: 100wh;
     position: relative;
     z-index: 999;
 }

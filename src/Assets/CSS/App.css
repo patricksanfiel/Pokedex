@@ -25,21 +25,6 @@
   color: #61dafb;
 }
 
-/* #selected-pokemon{
-  position: fixed;
-  top:0;
-  right: 0;
-  left:0;
-  bottom: 5em;
-  z-index: 10;
-  background-color:white;
-} */
-/* #close-selected{
-  position: fixed;
-  z-index: 15;
-  bottom: 3em;
-} */
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
